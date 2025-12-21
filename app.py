@@ -27,13 +27,14 @@ try:
     st.write(df.describe())
 
     # ---------------- Visualization ----------------
-    numeric_cols = df.select_dtypes(include=["int64", "float64"]).columns
-    if len(numeric_cols) > 0:
-        col = st.selectbox("Select column to visualize", numeric_cols)
-         fig, ax = plt.subplots()
-        sns.histplot(df[col], bins=20, kde=True)
-        ax.set_title(f"Distribution of {col}")
-        st.pyplot(fig)
+    st.subheader("Data Visualization")
+    
+    col = st.selectbox("Select a column", df.columns)
+    fig, ax = plt.subplots()
+    ax.hist(df[col], bins=20)
+    ax.set_title(f"Distribution of {col}")
+
+    st.pyplot(fig)
 
     # ---------------- Depression Prediction ----------------
     st.header("Depression Prediction (Demo Model)")
